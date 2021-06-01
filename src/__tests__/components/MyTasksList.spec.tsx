@@ -1,7 +1,7 @@
-import React from 'react';
-import { render, fireEvent } from '@testing-library/react-native';
+import React from "react";
+import { render, fireEvent } from "@testing-library/react-native";
 
-import { MyTasksList } from '../../components/MyTasksList';
+import { MyTasksList } from "../../components/MyTaskList/MyTasksList";
 
 let tasks: {
   id: number;
@@ -12,24 +12,23 @@ let tasks: {
 let mockedOnLongPress: jest.Mock;
 let mockedOnPress: jest.Mock;
 
-describe('MyTasksList', () => {
-
+describe("MyTasksList", () => {
   beforeAll(() => {
     tasks = [
       {
         id: new Date().getTime(),
-        title: 'Primeiro todo',
-        done: false
+        title: "Primeiro todo",
+        done: false,
       },
       {
         id: new Date().getTime() + 1,
-        title: 'Segundo todo',
-        done: false
+        title: "Segundo todo",
+        done: false,
       },
       {
         id: new Date().getTime() + 2,
-        title: 'Terceiro todo',
-        done: true
+        title: "Terceiro todo",
+        done: true,
       },
     ];
 
@@ -37,29 +36,47 @@ describe('MyTasksList', () => {
     mockedOnPress = jest.fn();
   });
 
-  it('should be able to render all tasks', () => {
-    const { getByText } = render(<MyTasksList tasks={tasks} onLongPress={mockedOnLongPress} onPress={mockedOnPress} />)
-    
-    getByText('Primeiro todo');
-    getByText('Segundo todo');
-    getByText('Terceiro todo');
+  it("should be able to render all tasks", () => {
+    const { getByText } = render(
+      <MyTasksList
+        tasks={tasks}
+        onLongPress={mockedOnLongPress}
+        onPress={mockedOnPress}
+      />
+    );
+
+    getByText("Primeiro todo");
+    getByText("Segundo todo");
+    getByText("Terceiro todo");
   });
 
   it('should be able to handle "longPress" event', () => {
-    const { getByText } = render(<MyTasksList tasks={tasks} onLongPress={mockedOnLongPress} onPress={mockedOnPress} />)
-    const firstTask = getByText('Primeiro todo');
+    const { getByText } = render(
+      <MyTasksList
+        tasks={tasks}
+        onLongPress={mockedOnLongPress}
+        onPress={mockedOnPress}
+      />
+    );
+    const firstTask = getByText("Primeiro todo");
 
-    fireEvent(firstTask, 'longPress');
+    fireEvent(firstTask, "longPress");
 
     expect(mockedOnLongPress).toHaveBeenCalledWith(tasks[0].id);
   });
 
-  it('should be able to handle "press" event', () => {    
-    const { getByText } = render(<MyTasksList tasks={tasks} onLongPress={mockedOnLongPress} onPress={mockedOnPress} />)
-    const secondTask = getByText('Segundo todo');
+  it('should be able to handle "press" event', () => {
+    const { getByText } = render(
+      <MyTasksList
+        tasks={tasks}
+        onLongPress={mockedOnLongPress}
+        onPress={mockedOnPress}
+      />
+    );
+    const secondTask = getByText("Segundo todo");
 
     fireEvent.press(secondTask);
 
     expect(mockedOnPress).toHaveBeenCalledWith(tasks[1].id);
   });
-})
+});

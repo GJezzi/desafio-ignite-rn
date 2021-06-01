@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
-import { Header } from "../components/Header";
-import { MyTasksList } from "../components/MyTasksList";
-import { TodoInput } from "../components/TodoInput";
+import { Header } from "../components/Header/Header";
+import { MyTasksList } from "../components/MyTaskList/MyTasksList";
+import { TodoInput } from "../components/TodoInput/TodoInput";
 
 interface Task {
   id: number;

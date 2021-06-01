@@ -1,16 +1,20 @@
-import React from 'react';
-import { StatusBar } from 'react-native';
-import { Home } from './src/pages/Home';
+import React from "react";
+import { StatusBar } from "react-native";
+import { ThemeProvider } from "styled-components";
+
+import light from "./src/themes/light";
+import dark from "./src/themes/dark";
+import { Home } from "./src/pages/Home";
 
 export default function App() {
   return (
-    <>
-      <StatusBar 
-        backgroundColor="transparent" 
-        translucent 
-        barStyle="light-content" 
+    <ThemeProvider theme={light}>
+      <StatusBar
+        backgroundColor="transparent"
+        translucent
+        barStyle="light-content"
       />
       <Home />
-    </>
+    </ThemeProvider>
   );
 }
