@@ -1,5 +1,6 @@
 import React from "react";
 import { render, fireEvent } from "@testing-library/react-native";
+import { ThemeProvider } from "styled-components/native";
 
 import { MyTasksList } from "../../components/MyTaskList/MyTasksList";
 
@@ -11,6 +12,23 @@ let tasks: {
 
 let mockedOnLongPress: jest.Mock;
 let mockedOnPress: jest.Mock;
+
+const theme = {
+  title: "light",
+  colors: {
+    primary: "#273fad",
+    secondary: "#3fad27",
+    inputBackgroundColor: "#f5f4f8",
+    text: "#fff",
+    inputText: "#A09CB1",
+    headerTextColor: "#3D3D4D",
+    doneMarkerColor: "#273FAD",
+    doneText: "#A09CB1",
+    markerBorder: "#3d3d4d",
+    taskText: "#3D3D4D",
+    doneButtonColor: "rgba(25, 61, 223, 0.1)",
+  },
+};
 
 describe("MyTasksList", () => {
   beforeAll(() => {
@@ -38,11 +56,13 @@ describe("MyTasksList", () => {
 
   it("should be able to render all tasks", () => {
     const { getByText } = render(
-      <MyTasksList
-        tasks={tasks}
-        onLongPress={mockedOnLongPress}
-        onPress={mockedOnPress}
-      />
+      <ThemeProvider theme={theme}>
+        <MyTasksList
+          tasks={tasks}
+          onLongPress={mockedOnLongPress}
+          onPress={mockedOnPress}
+        />
+      </ThemeProvider>
     );
 
     getByText("Primeiro todo");
@@ -52,11 +72,13 @@ describe("MyTasksList", () => {
 
   it('should be able to handle "longPress" event', () => {
     const { getByText } = render(
-      <MyTasksList
-        tasks={tasks}
-        onLongPress={mockedOnLongPress}
-        onPress={mockedOnPress}
-      />
+      <ThemeProvider theme={theme}>
+        <MyTasksList
+          tasks={tasks}
+          onLongPress={mockedOnLongPress}
+          onPress={mockedOnPress}
+        />
+      </ThemeProvider>
     );
     const firstTask = getByText("Primeiro todo");
 
@@ -67,11 +89,13 @@ describe("MyTasksList", () => {
 
   it('should be able to handle "press" event', () => {
     const { getByText } = render(
-      <MyTasksList
-        tasks={tasks}
-        onLongPress={mockedOnLongPress}
-        onPress={mockedOnPress}
-      />
+      <ThemeProvider theme={theme}>
+        <MyTasksList
+          tasks={tasks}
+          onLongPress={mockedOnLongPress}
+          onPress={mockedOnPress}
+        />
+      </ThemeProvider>
     );
     const secondTask = getByText("Segundo todo");
 

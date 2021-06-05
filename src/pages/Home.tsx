@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
+import { ThemeProvider } from "styled-components";
 
 import { Header } from "../components/Header/Header";
 import { MyTasksList } from "../components/MyTaskList/MyTasksList";
 import { TodoInput } from "../components/TodoInput/TodoInput";
+import { SwitchMode } from "../components/SwitchMode/SwitchMode";
 
+import light from "../themes/light";
+import dark from "../themes/dark";
 interface Task {
   id: number;
   title: string;
@@ -11,7 +15,15 @@ interface Task {
 }
 
 export function Home() {
+  const [theme, setTheme] = useState(light);
   const [tasks, setTasks] = useState<Task[]>([]);
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+
+  const toggleTheme = useCallback(() => {
+    toggleSwitch();
+    setTheme(theme.title === "light" ? dark : light);
+  }, [theme]);
 
   function handleAddTask(newTaskTitle: string) {
     //TODO - add new task if it's not empty
@@ -44,15 +56,29 @@ export function Home() {
 
   return (
     <>
-      <Header />
+      <ThemeProvider theme={theme}>
+        <Header />
+        <SwitchMode
+          onValueChange={toggleTheme}
+          value={isEnabled}
+          trackColor={{
+            false: theme.colors.secondary,
+            true: theme.colors.secondary,
+          }}
+          thumbColor={theme.colors.text}
+        />
 
-      <TodoInput addTask={handleAddTask} />
+        <TodoInput
+          placeholderTextColor={theme.colors.inputPlaceholderTextColor}
+          addTask={handleAddTask}
+        />
 
-      <MyTasksList
-        tasks={tasks}
-        onPress={handleMarkTaskAsDone}
-        onLongPress={handleRemoveTask}
-      />
+        <MyTasksList
+          tasks={tasks}
+          onPress={handleMarkTaskAsDone}
+          onLongPress={handleRemoveTask}
+        />
+      </ThemeProvider>
     </>
   );
 }

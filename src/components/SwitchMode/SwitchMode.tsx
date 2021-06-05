@@ -1,16 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import { Switch } from "react-native";
 
 import { Container } from "./SwitchMode.styles";
 
-const SwitchMode = () => {
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+export const SwitchMode = ({
+  onValueChange,
+  value,
+  trackColor,
+  thumbColor,
+}) => {
   return (
     <Container>
-      <Switch onValueChange={toggleSwitch} value={isEnabled} />
+      <Switch
+        onValueChange={onValueChange}
+        value={value}
+        trackColor={trackColor}
+        thumbColor={thumbColor}
+      />
     </Container>
   );
 };
-
-export default SwitchMode;

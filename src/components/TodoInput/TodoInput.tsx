@@ -7,9 +7,10 @@ import { Container, TodoTextInput, TaskButton } from "./TodoInput.styles";
 
 interface TodoInputProps {
   addTask: (task: string) => void;
+  placeholderTextColor: string;
 }
 
-export function TodoInput({ addTask }: TodoInputProps) {
+export function TodoInput({ addTask, placeholderTextColor }: TodoInputProps) {
   const [task, setTask] = useState("");
 
   function handleAddNewTask() {
@@ -33,6 +34,7 @@ export function TodoInput({ addTask }: TodoInputProps) {
         value={task}
         onChangeText={setTask}
         onSubmitEditing={handleAddNewTask}
+        placeholderTextColor={placeholderTextColor}
       />
       <TaskButton
         testID="add-new-task-button"

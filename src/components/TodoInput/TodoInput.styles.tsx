@@ -1,9 +1,9 @@
 import styled from "styled-components/native";
 
 export const Container = styled.View`
-  background: ${(props) => props.theme.colors.background};
+  background: ${(props) => props.theme.colors.inputBackgroundColor};
   border-radius: 5px;
-  top: -25px;
+  top: -55px;
   margin: 0 40px;
   height: 50px;
   flex-direction: row;
@@ -12,7 +12,7 @@ export const Container = styled.View`
 
 export const TodoTextInput = styled.TextInput`
   flex: 1;
-  background: ${(props) => props.theme.colors.background};
+  background: ${(props) => props.theme.colors.inputBackgroundColor};
   padding-left: 12px;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;

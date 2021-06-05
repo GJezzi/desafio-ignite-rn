@@ -6,8 +6,16 @@ declare module 'styled-components' {
     colors: {
       primary: string,
       secondary: string,
-      background: string,
-      text: string
+      inputBackgroundColor: string,
+      text: string,
+      inputTextColor: string, 
+      inputPlaceholderTextColor: string,
+      headerTextColor: string,
+      doneMarkerColor: string,
+      doneText: string,
+      markerBorder: string,
+      taskText: string,
+      doneButtonColor: string,
     }
   }
 }
